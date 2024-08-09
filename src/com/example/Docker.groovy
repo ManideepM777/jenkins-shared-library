@@ -17,7 +17,6 @@ class Docker implements Serializable {
             def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
             def version = matcher[0][1]
             env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-        }
     }
 
     def buildDockerImage(String imageName) {
@@ -34,3 +33,4 @@ class Docker implements Serializable {
     def dockerPush(String imageName) {
         script.sh "docker push $imageName"
     }
+}
