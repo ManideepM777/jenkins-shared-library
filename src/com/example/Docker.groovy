@@ -34,14 +34,3 @@ class Docker implements Serializable {
     def dockerPush(String imageName) {
         script.sh "docker push $imageName"
     }
-
-    def commitVersionUpdate() {
-        script.withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-
-            script.sh "git remote set-url origin https://${USER}:${PASS}@github.com/ManideepM777/java-maven-app.git"
-            script.sh 'git add .'
-            script.sh 'git commit -m "ci: version bump"'
-            script.sh 'git push origin HEAD:java-maven-version-increment'
-
-        }
-    }
