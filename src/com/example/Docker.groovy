@@ -9,7 +9,7 @@ class Docker implements Serializable {
         this.script = script
     }
     
-    def buildDockerImage(String imageName) {
+    def buildDockerImage(String repository, String imageName) {
         script.echo "building the docker image..."
         script.sh "docker build -t ${repository}:$imageName ."
     }
@@ -20,7 +20,7 @@ class Docker implements Serializable {
         }
     }
 
-    def dockerPush(String imageName) {
+    def dockerPush(String repository, String imageName) {
         script.sh "docker push ${repository}:$imageName"
     }
 }
